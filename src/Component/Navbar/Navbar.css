@@ -1,0 +1,111 @@
+/* navbar.css - Improved Version with Logo Visibility & Gradient Button */
+
+/* Base Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem; /* Using rem for better scalability */
+  background-color: #1a1a1a; /* Slightly darker for more depth */
+  color: #f5f5f5; /* Off-white for softer contrast */
+  font-family: 'Poppins', sans-serif; /* A more modern and widely used sans-serif font */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Logo Styling */
+.navbar img {
+  height: 2.8125rem; /* 45px converted to rem */
+  width: auto;
+  /* If your logo is a PNG with transparency, this helps it stand out against the dark background.
+     If it's an SVG, you might want to adjust its internal fill/stroke colors directly in the SVG file
+     or via CSS if you're inlining it. */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); /* Adds a subtle glow to make it more visible */
+}
+
+/* Navigation Menu */
+.nav-menu {
+  display: flex;
+  gap: 1.875rem; /* 30px converted to rem */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem; /* 16px converted to rem */
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Underline Effect on Hover */
+.nav-menu li::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #00bcd4; /* Use the brand color for the underline */
+  bottom: -0.3125rem; /* 5px converted to rem, slightly adjusted for better visual */
+  left: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-menu li:hover::after {
+  width: 100%;
+}
+
+.nav-menu li:hover {
+  color: #00bcd4; /* Brand color on hover */
+}
+
+/* Connect Button with Transparent Gradient */
+.nav-connect {
+  /* Initial background is transparent to allow the gradient overlay */
+  background: transparent;
+  padding: 0.625rem 1.25rem; /* 10px 20px converted to rem */
+  border-radius: 9999px; /* Highly rounded for a pill shape */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transition all properties for smooth effects */
+  color: #f5f5f5; /* Light text for visibility over the gradient */
+  border: none; /* Ensure no default button border */
+  font-size: 1rem; /* Consistency with menu items */
+
+  /* Gradient Background */
+  position: relative; /* Needed for pseudo-element */
+  overflow: hidden; /* Ensures gradient doesn't spill out */
+  z-index: 1; /* Puts button content above the pseudo-element gradient */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+}
+
+/* Gradient Overlay for the Button */
+.nav-connect::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(267deg,#DA7C25 0.36% ,#B923E1); /* Pink to Orange gradient with 80% opacity */
+  z-index: -1; /* Puts the gradient behind the text */
+  border-radius: inherit; /* Inherit the button's border-radius */
+  transition: opacity 0.5s ease;
+  opacity: 1; /* Initial full opacity */
+}
+
+
+.nav-connect:hover {
+   transform: scale(1.05);
+}
+
+.nav-connect:active {
+  transform: translateY(1px); /* Subtle press on click */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Deeper shadow on active */
+}
+
+/* Ensure button text is visible and not affected by the pseudo-element's z-index */
+.nav-connect span {
+  position: relative;
+  z-index: 2; /* Ensure the text is above everything */
+}
