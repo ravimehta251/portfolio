@@ -24,34 +24,32 @@
   margin: 0;
   padding: 0;
 }
-
 .nav-menu li {
   position: relative;
   cursor: pointer;
-  font-size: 1rem; /* 16px converted to rem */
+  font-size: 1.2rem; /* 16px converted to rem */
   font-weight: 500;
-  transition: color 0.3s ease-in-out;
+  background: white;
+    background-clip:text ;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:transparent;
+}
+
+.nav-menu li{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+ 
+}
+.nav-menu li img{
+  height: 20px;
+  width: auto;
+  display: flex;
+  margin: auto;
 }
 
 
-.nav-menu li::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: #00bcd4; /* Use the brand color for the underline */
-  bottom: -0.3125rem; /* 5px converted to rem, slightly adjusted for better visual */
-  left: 0;
-  transition: width 0.3s ease-in-out;
-}
 
-.nav-menu li:hover::after {
-  width: 100%;
-}
-
-.nav-menu li:hover {
-  color: #00bcd4; /* Brand color on hover */
-}
 
 /* Connect Button with Transparent Gradient */
 .nav-connect {
@@ -102,4 +100,55 @@
 .nav-connect span {
   position: relative;
   z-index: 2; /* Ensure the text is above everything */
+}
+.anchor-link{
+  text-decoration: none;
+  color: white; /* Inherit color from parent */
+}
+.nav-mob-close{
+  display: none;
+}
+.nav-mob-open{
+  display: none;
+  cursor: pointer;
+}
+@media (max-width:768px){
+  .navbar{
+    margin: 20px 50px;
+  }
+  .nav-connect{
+    display: none;
+  }
+  .nav-mob-open{
+    display: block;
+    position: fixed;
+    right: 30px;
+  }
+  .nav-mob-close{
+    display: block;
+    position: relative;
+    top: 30px;
+    left: 290px;
+    width: 30px;
+  }
+  .nav-menu {
+    position: fixed;
+    flex-direction: column;
+    align-items: start;
+    top: 0;
+    gap: 30px;
+    background: #1F0016;
+    width: 350px;
+    height: 100%;
+    z-index: 2;
+    transition: right 0.5s;
+    right: -350px;
+
+  }
+  .nav-menu li{
+    font-size: 30px;
+    padding-left: 100px;
+    flex-direction: row;
+    gap: 20px;
+  }
 }
