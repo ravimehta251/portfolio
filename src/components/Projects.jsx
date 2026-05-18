@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaServer, FaChartLine } from 'react-icons/fa';
+import TiltCard from './TiltCard';
 
 const Projects = () => {
   const projects = [
@@ -31,7 +32,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-24 relative bg-slate-800/20">
+    <section id="projects" className="py-24 relative bg-[#0a0a0e]/50 z-10">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,12 +55,12 @@ const Projects = () => {
               transition={{ duration: 0.6, delay: idx * 0.2 }}
               className="group relative"
             >
-              <div className={`absolute -inset-0.5 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-20 transition duration-500 blur-xl rounded-3xl`} style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }}></div>
-              <div className="glass-card relative p-8 rounded-3xl h-full flex flex-col hover:-translate-y-2 transition-transform duration-300">
+              <div className={`absolute -inset-0.5 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-40 transition duration-500 blur-2xl rounded-3xl`}></div>
+              <TiltCard className="glass-card relative p-8 rounded-3xl h-full flex flex-col backdrop-blur-xl border border-slate-700/60 bg-slate-900/40 hover:bg-slate-900/60 transition-colors">
                 
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center border border-slate-700 shadow-inner">
+                    <div className="w-14 h-14 rounded-2xl bg-slate-800/80 flex items-center justify-center border border-slate-700 shadow-inner">
                       {project.icon}
                     </div>
                     <div>
@@ -68,10 +69,10 @@ const Projects = () => {
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <a href={project.github} className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition-all">
+                    <a href={project.github} className="w-10 h-10 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all">
                       <FaGithub size={20} />
                     </a>
-                    <a href={project.demo} className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition-all">
+                    <a href={project.demo} className="w-10 h-10 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all">
                       <FaExternalLinkAlt size={16} />
                     </a>
                   </div>
@@ -86,7 +87,7 @@ const Projects = () => {
                   <ul className="space-y-2">
                     {project.features.map((feature, i) => (
                       <li key={i} className="flex items-center text-slate-400 text-sm">
-                        <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${project.color} mr-2`}></span>
+                        <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${project.color} mr-2 shadow-[0_0_8px_currentColor]`}></span>
                         {feature}
                       </li>
                     ))}
@@ -100,12 +101,12 @@ const Projects = () => {
 
                 <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-slate-700/50">
                   {project.tech.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 text-xs font-medium rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                    <span key={i} className="px-3 py-1 text-xs font-medium rounded-full bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-slate-500 hover:text-white transition-colors cursor-default">
                       {tech}
                     </span>
                   ))}
                 </div>
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

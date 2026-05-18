@@ -52,38 +52,67 @@ const TechStack = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
+
   return (
-    <section id="skills" className="py-24 relative bg-slate-800/20">
+    <section id="skills" className="py-32 relative bg-[#0a0a0e]/50 z-10">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Tech <span className="text-blue-500">Stack</span></h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mx-auto rounded-full"></div>
+          <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter">Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Stack</span></h2>
+          <div className="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10">
           {categories.map((category, idx) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="glass-card p-8 rounded-2xl"
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+              className="group relative"
             >
-              <h3 className="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-4">{category.title}</h3>
-              <div className="flex flex-wrap gap-4">
-                {category.skills.map((skill) => (
-                  <div key={skill.name} className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 border border-slate-700 hover:border-blue-500/50 hover:bg-slate-800 transition-all cursor-default group">
-                    <span className="text-xl group-hover:scale-110 transition-transform">{skill.icon}</span>
-                    <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">{skill.name}</span>
-                  </div>
-                ))}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition duration-500 blur-xl rounded-3xl"></div>
+              <div className="glass-card p-8 rounded-3xl relative backdrop-blur-xl border border-slate-700/60 bg-slate-900/40 h-full">
+                <h3 className="text-2xl font-bold text-white mb-8 border-b border-slate-700/50 pb-4 tracking-tight">{category.title}</h3>
+                
+                <motion.div 
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="flex flex-wrap gap-4"
+                >
+                  {category.skills.map((skill) => (
+                    <motion.div 
+                      variants={itemVariants}
+                      key={skill.name} 
+                      className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0a0a0e]/80 border border-slate-700/80 hover:border-blue-500 hover:bg-slate-800 transition-all cursor-default hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:-translate-y-1"
+                    >
+                      <span className="text-xl drop-shadow-[0_0_8px_currentColor]">{skill.icon}</span>
+                      <span className="text-sm font-semibold text-slate-300 transition-colors">{skill.name}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
               </div>
             </motion.div>
           ))}
