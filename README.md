@@ -61,13 +61,13 @@ npm run preview
 
 ### Resume
 
-The resume buttons read `VITE_RESUME_URL` from the local `.env` file. Copy `.env.example` when setting up a new environment, then provide the real URL:
+The resume buttons use the tracked `public/resume.pdf` by default, so every deployment built from the latest GitHub push serves the latest resume at `/resume.pdf`. Set `VITE_RESUME_URL` in a local `.env` file only when you want to use a different hosted PDF:
 
 ```env
-VITE_RESUME_URL=https://example.com/path-to-your-resume.pdf
+VITE_RESUME_URL=/resume.pdf
 ```
 
-For a local PDF, add an optimized file at `public/ravi-kumar-resume.pdf` and set `VITE_RESUME_URL=/ravi-kumar-resume.pdf`. Add the `download` attribute to resume links only if you want forced download behavior; leaving it off provides an in-browser preview.
+Keep the PDF at `public/resume.pdf` and commit it to GitHub when updating the resume. Add the `download` attribute to resume links only if you want forced download behavior; leaving it off provides an in-browser preview.
 
 `VITE_` variables are included in the browser bundle. Use this variable for configuration, not for secrets.
 

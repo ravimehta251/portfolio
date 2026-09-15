@@ -3,7 +3,7 @@ export const links = {
   linkedin: 'https://www.linkedin.com/in/ravi-mehta2511/',
   leetcode: 'https://leetcode.com/u/ravi_kumar_129/',
   email: 'mailto:ravi7481081raj@gmail.com',
-  resume: import.meta.env.VITE_RESUME_URL,
+  resume: import.meta.env.VITE_RESUME_URL || '/resume.pdf',
 };
 
 export const navItems = [
