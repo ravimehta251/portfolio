@@ -1,1 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="b" x2="1" y2="1"><stop stop-color="#070b14"/><stop offset="1" stop-color="#111b35"/></linearGradient><linearGradient id="a"><stop stop-color="#67e8f9"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect width="1200" height="630" fill="url(#b)"/><g stroke="#60a5fa" opacity=".15"><path d="M0 100h1200M0 200h1200M0 300h1200M0 400h1200M0 500h1200M100 0v630M200 0v630M300 0v630M400 0v630M500 0v630M600 0v630M700 0v630M800 0v630M900 0v630M1000 0v630M1100 0v630"/></g><circle cx="1020" cy="120" r="170" fill="#2563eb" opacity=".12"/><text x="90" y="190" fill="#67e8f9" font-family="Arial" font-size="28" letter-spacing="4">BACKEND · FULL-STACK · DISTRIBUTED SYSTEMS</text><text x="90" y="330" fill="white" font-family="Arial" font-weight="700" font-size="94">Ravi Kumar</text><text x="90" y="420" fill="url(#a)" font-family="Arial" font-size="48">Reliable systems under real constraints.</text><text x="90" y="510" fill="#94a3b8" font-family="Arial" font-size="25">Java · Spring Boot · Kafka · Redis · React · Docker</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#080b10"/>
+  <g stroke="#19232e" stroke-width="1"><path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200M100 0V630M200 0V630M300 0V630M400 0V630M500 0V630M600 0V630M700 0V630M800 0V630M900 0V630M1000 0V630M1100 0V630"/></g>
+  <rect x="44" y="44" width="1112" height="542" rx="24" fill="#080b10" stroke="#27313b"/>
+  <circle cx="82" cy="95" r="5" fill="#82f5bb"/>
+  <text x="100" y="102" font-family="Segoe UI,Arial,sans-serif" font-size="17" letter-spacing="3" fill="#82f5bb">SOFTWARE ENGINEER</text>
+  <text x="78" y="260" font-family="Segoe UI,Arial,sans-serif" font-size="87" font-weight="700" fill="#eaf1f7">Ravi Kumar<tspan fill="#82f5bb">.</tspan></text>
+  <text x="82" y="329" font-family="Segoe UI,Arial,sans-serif" font-size="29" fill="#b0becb">Java &amp; Spring Boot. Built for scale.</text>
+  <text x="82" y="453" font-family="Segoe UI,Arial,sans-serif" font-size="18" fill="#b0becb">Distributed systems · Real-time applications · AI / RAG</text>
+  <path d="M82 490H1118" stroke="#27313b"/>
+  <text x="82" y="543" font-family="Consolas,monospace" font-size="17" fill="#b0becb">RECALL / BIDLY / SHOPMESH</text>
+  <g stroke="#426a5c" stroke-width="2"><path d="M945 180 850 270 970 375 1095 260 945 180M850 270 1095 260M945 180 970 375"/></g>
+  <g fill="#10261d" stroke="#82f5bb" stroke-width="2"><circle cx="945" cy="180" r="17"/><circle cx="850" cy="270" r="17"/><circle cx="970" cy="375" r="17"/><circle cx="1095" cy="260" r="17"/></g>
+  <g fill="#82f5bb"><circle cx="945" cy="180" r="5"/><circle cx="850" cy="270" r="5"/><circle cx="970" cy="375" r="5"/><circle cx="1095" cy="260" r="5"/></g>
+</svg>

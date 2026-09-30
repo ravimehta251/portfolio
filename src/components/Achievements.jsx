@@ -1,4 +1,0 @@
-import { Award, Code2, Trophy } from 'lucide-react';
-import { achievements } from '../data/portfolio'; import Reveal from './Reveal'; import SectionHeading from './SectionHeading';
-const icons = [Trophy, Award, Code2];
-export default function Achievements() { return <section id="achievements" className="section section--tinted"><div className="shell"><SectionHeading eyebrow="06 / Achievements" title="Competitive building and consistent practice." /><div className="achievement-grid">{achievements.map((item, index) => { const Icon = icons[index]; return <Reveal as="article" className="achievement" delay={index * .08} key={item.event}><div className="achievement__icon"><Icon /><span>0{index + 1}</span></div><p>{item.place}</p><h3>{item.event}</h3><div className="achievement__line" /><span>{item.detail}</span></Reveal>; })}</div></div></section>; }

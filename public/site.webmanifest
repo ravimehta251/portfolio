@@ -1,1 +1,12 @@
-{"name":"Ravi Kumar — Software Engineer","short_name":"Ravi Kumar","description":"Backend and full-stack software engineering portfolio","start_url":"/","display":"standalone","background_color":"#070b14","theme_color":"#070b14","icons":[{"src":"/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}
+{
+  "name": "Ravi Kumar — Engineering Portfolio",
+  "short_name": "Ravi Kumar",
+  "description": "Java, Spring Boot, distributed systems, and full-stack engineering.",
+  "lang": "en-IN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "theme_color": "#080b10",
+  "background_color": "#080b10",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

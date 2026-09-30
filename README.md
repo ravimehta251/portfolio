@@ -1,140 +1,68 @@
 # Ravi Kumar — Engineering Portfolio
 
-A responsive portfolio for a backend and full-stack software engineer, built with React, Vite, Framer Motion, React Three Fiber, Drei, and modern CSS.
+A complete React + TypeScript portfolio built with Vite, Tailwind CSS, Framer Motion, Lucide, React Three Fiber, Drei, and Three.js. All personal information, project descriptions, links, education, and achievements come from the supplied `H:/RAVI_RESUME.pdf`. The deployed resume is the tracked `public/resume.pdf`.
 
-## Redesign summary
-
-- Replaced the duplicated legacy component trees with one data-driven component system.
-- Reframed projects as engineering case studies with challenges, architecture decisions, diagrams, and verified outcomes.
-- Added technical expertise, engineering metrics, education, achievements, coding profiles, and an accessible contact workflow.
-- Added a lazy-loaded distributed-systems 3D hero with reduced-motion and tab-visibility handling.
-- Added responsive navigation, active-section state, scroll progress, accessible focus states, SEO metadata, structured data, a manifest, and social-preview artwork.
-- Removed unsupported claims, fabricated LeetCode breakdowns, dead demo links, expensive custom-cursor behavior, and duplicate dependencies.
-
-## Structure
-
-```text
-src/
-├── components/
-│   ├── three/NetworkScene.jsx
-│   ├── ArchitectureDiagram.jsx
-│   ├── Navbar.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Skills.jsx
-│   ├── Projects.jsx
-│   ├── ProjectCard.jsx
-│   ├── EngineeringMetrics.jsx
-│   ├── Education.jsx
-│   ├── Achievements.jsx
-│   ├── CodingProfiles.jsx
-│   ├── Contact.jsx
-│   ├── Footer.jsx
-│   └── shared animation/heading components
-├── data/portfolio.js
-├── hooks/useActiveSection.js
-├── App.jsx
-└── index.css
-public/
-├── favicon.svg
-├── site.webmanifest
-├── social-preview.svg
-└── robots.txt
-```
-
-## Install and run
+## Run and validate
 
 ```bash
 npm install
 npm run dev
 ```
 
-Production validation:
-
 ```bash
+npm run typecheck
 npm run lint
 npm run build
 npm run preview
 ```
 
-## Configuration
+For the browser interaction and responsive checks, leave `npm run dev` running in one terminal, then run `npm run check:browser` in another. Set `PORTFOLIO_URL` if Vite uses another port. The check uses Edge or Chrome on Windows (or a Playwright browser installation on other systems) and writes screenshots to the ignored `qa/` directory.
 
-### Resume
+`npm run build` checks TypeScript before producing `dist/`. Serve `dist/` through a static host or use `npm run preview` to inspect that production output locally.
 
-The resume buttons use the tracked `public/resume.pdf` by default, so every deployment built from the latest GitHub push serves the latest resume at `/resume.pdf`. Set `VITE_RESUME_URL` in a local `.env` file only when you want to use a different hosted PDF:
+## Structure
 
-```env
-VITE_RESUME_URL=/resume.pdf
+```text
+src/
+  App.tsx                 All seven sections, navigation, cursor, and footer
+  main.tsx                React entry point and global styles
+  data/portfolio.ts       Resume-derived profile, skills, projects, and education
+  types/portfolio.ts      Shared content types
+  sections/               Home, about, skills, projects, achievements, education, contact
+  components/             Navigation, project details, interactive demos, shared UI
+  hooks/                  Active-section tracking
+  three/NetworkScene.tsx  Lazy-loaded distributed-system hero
+public/
+  resume.pdf              Downloadable original resume
+  favicon.svg             Browser icon
+  social-preview.png      1200 × 630 social card
+  social-preview.svg      Editable social-card source
+  robots.txt              Local/default crawler rules
+  site.webmanifest        Site identity and icon
 ```
 
-Keep the PDF at `public/resume.pdf` and commit it to GitHub when updating the resume. Add the `download` attribute to resume links only if you want forced download behavior; leaving it off provides an in-browser preview.
+The main app links every section through matching navigation anchors. Projects open accessible detail dialogs with problem, solution, stack, decisions, repository links, and interactive architecture demonstrations. Recall illustrates the document-to-answer pipeline; Bidly illustrates serialized bid processing; ShopMesh illustrates checkout and payment-failure compensation. Demo data and timing are illustrative, run entirely in the browser, and do not connect to the project backends. Resume-supported outcomes are presented separately.
 
-`VITE_` variables are included in the browser bundle. Use this variable for configuration, not for secrets.
+The hero loads its 3D runtime on desktop with a static network alternative on mobile, for reduced motion, and if the scene fails. Rendering pauses outside the hero or in a hidden tab; users can pause it manually. The custom cursor is restricted to desktop pointer devices. Section reveals and interactive diagrams respect reduced-motion preferences.
 
-### Project screenshots
+## Contact behavior
 
-The project cards intentionally use architecture diagrams rather than fabricated screenshots. To add real screenshots:
+The contact form validates name, email, and message, then prepares a `mailto:` draft in the visitor's email app. The visitor reviews and sends it there. The site has no mail backend and never claims delivery. Email, telephone, GitHub, LinkedIn, and LeetCode destinations come from the resume.
 
-1. Export WebP or AVIF images at approximately 1600px wide.
-2. Place them in `public/projects/`.
-3. Add an `image` and descriptive `imageAlt` field to each project in `src/data/portfolio.js`.
-4. Render a responsive `<picture>` in `ProjectCard.jsx` above `ArchitectureDiagram`.
+## Content updates
 
-Do not use mock screenshots that imply a live deployment.
+Edit `src/data/portfolio.ts` for profile, navigation, skills, projects, and education. Achievements are rendered in `src/sections/Achievements.tsx`. Replace `public/resume.pdf` when the resume changes. Keep professional claims supported by the resume, and update identity metadata in `index.html` when changing profile details. Only add live-demo links when a real deployment exists.
 
-### Profile and project links
+## Deployment
 
-All verified URLs are centralized in `src/data/portfolio.js`. Update `links` for GitHub, LinkedIn, LeetCode, and resume changes. Project repository URLs live in the `projects` array. Live-demo controls should only be added after a real deployment URL exists.
+Use `npm run build` as the build command and `dist` as the publish directory on Vercel, Netlify, or another static host. The app currently expects deployment at a domain root.
 
-### Contact
+Copy `.env.example` to `.env.local` or set this build environment variable on the host:
 
-The contact section provides Ravi's email address, a copy-email control, location, GitHub, and LinkedIn. It does not include a contact form or phone number.
+```env
+SITE_URL=https://your-actual-domain.com
+```
 
-### Deployment metadata
+`SITE_URL` must be the actual HTTP(S) origin, without a subpath, query, or credentials. At build time it generates the canonical URL, Open Graph URL, absolute PNG social-image URLs, Person structured-data URL, `dist/sitemap.xml`, and the sitemap reference in `dist/robots.txt`. Leave it blank while a production domain is unknown: development and builds still work, with no invented canonical URL or sitemap domain. The default crawler rules remain available. `SITE_URL` is public metadata and must never contain secrets.
 
-A production domain was not provided, so no canonical URL or sitemap domain is fabricated. Before deployment:
-
-1. Add an absolute canonical URL in `index.html`.
-2. Add matching `og:url`, absolute Open Graph image URLs, and `url` in the JSON-LD object.
-3. Add `public/sitemap.xml` with the real production URL and reference it from `public/robots.txt`.
-4. Prefer a PNG social image for broad platform compatibility; `social-preview.svg` is the editable source.
-
-If deploying to a repository subpath, set Vite's `base` option in `vite.config.js` and update manifest asset paths accordingly.
-
-## Build and deployment
-
-### Vercel or Netlify
-
-- Build command: `npm run build`
-- Output directory: `dist`
-- Node version: current LTS
-
-### GitHub Pages
-
-Set the correct `base` in `vite.config.js` (`'/repository-name/'` for project pages), build, and publish `dist`. For a user/organization root page, `/` remains correct.
-
-## Missing information
-
-The implementation still needs these owner decisions:
-
-- Final production domain for canonical, sitemap, and absolute social metadata.
-- A local resume PDF if Google Drive should be replaced.
-- Real project screenshots, if desired.
-- Real live-demo URLs, if deployments become available.
-
-Existing GitHub, LinkedIn, LeetCode, email, project repository, and resume links were retained from the supplied resume/current site.
-
-## QA checklist
-
-- [x] All supplied resume details represented without invented employment, metrics, demos, or profile statistics.
-- [x] Navigation, project, profile, email, and resume controls have destinations.
-- [x] Keyboard-accessible mobile navigation with Escape support and visible focus states.
-- [x] Semantic sections, labels, status messaging, skip link, and decorative-canvas hiding.
-- [x] Layout breakpoints cover 320px mobile through large desktop without page-level horizontal overflow.
-- [x] Reduced motion removes the 3D canvas and suppresses nonessential animation.
-- [x] Three.js is dynamically imported, pixel ratio is capped, and rendering pauses in hidden tabs.
-
-- [x] `npm run lint` passes.
-- [x] `npm run build` passes.
-- [ ] Test the deployed URL with Lighthouse and real iOS/Android devices.
-- [ ] Add final canonical/sitemap URLs after the deployment domain is known.
+The PNG social card is served locally and has no external image dependency. Its SVG source is included for future design edits. Validate the deployed site on actual mobile devices and run Lighthouse against the production URL before launch.

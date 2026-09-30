@@ -1,0 +1,9 @@
+import { ArrowUpRight, Code2, Trophy } from 'lucide-react'
+import { Reveal, SectionHeading } from '../components/Shared'
+import { profile } from '../data/portfolio'
+export default function Achievements() {
+  return <section id="achievements" className="section achievements-section"><div className="container"><SectionHeading number="04" eyebrow="MILESTONES" title={<>Practice meets <em>possibility.</em></>} />
+    <div className="achievement-grid"><Reveal className="achievement-card"><div className="achievement-top"><Code2 size={22} /><span className="mono">CONSISTENCY / PROBLEM SOLVING</span></div><strong className="achievement-number">500<span>+</span></strong><h3>DSA problems. One continuous journey.</h3><p>Solved on LeetCode, with sustained practice across arrays, strings, graphs, and trees.</p><a className="text-link" href={profile.leetcode} target="_blank" rel="noopener noreferrer">Explore my LeetCode <ArrowUpRight size={16} /></a><div className="practice-grid" aria-hidden="true">{Array.from({ length: 126 }, (_, i) => <i key={i} className={`level-${(i * 7 + Math.floor(i / 9)) % 4}`} />)}</div><span className="grid-caption mono">A VISUAL TRIBUTE TO CONSISTENT PRACTICE</span></Reveal>
+      <Reveal className="achievement-card hackathon-card" delay={0.1}><div className="achievement-top"><Trophy size={22} /><span className="mono">BUILDING / SOCIAL IMPACT</span></div><strong className="achievement-number">2<span>nd</span></strong><h3>Runner-Up · JSSATE Hackathon</h3><p>Engineered Snap2Clean, a civic-issue reporting platform recognized for technical execution and social impact.</p><div className="hackathon-stack"><span>React</span><span>Google Maps API</span><span>MySQL</span></div><div className="trophy-outline" aria-hidden="true"><Trophy size={110} strokeWidth={0.7} /></div><span className="award-note mono">IDEAS → CODE → IMPACT</span></Reveal>
+    </div></div></section>
+}
