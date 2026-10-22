@@ -1,8 +1,0 @@
-com\example\events\CreateOrderRequest.class
-com\example\events\EventsApplication.class
-com\example\events\KafkaFailureConfig.class
-com\example\events\OrderEventConsumers.class
-com\example\events\OrderEventProducer.class
-com\example\events\OrderEventController.class
-com\example\events\OrderCreatedEvent.class
-com\example\events\KafkaTopics.class
