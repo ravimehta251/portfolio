@@ -2,7 +2,6 @@ import process from 'node:process'
 import { URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
 
 // Deployment metadata is optional locally. No production domain is assumed.
 function deploymentMetadata(siteUrl) {
@@ -45,10 +44,6 @@ export default defineConfig(({ mode }) => {
     siteUrl = `${url.origin}/`
   }
   return {
-    plugins: [react(), tailwindcss(), deploymentMetadata(siteUrl)],
-    build: {
-      // The 3D scene is dynamically imported; its runtime is outside the initial UI bundle.
-      chunkSizeWarningLimit: 1000,
-    },
+    plugins: [react(), deploymentMetadata(siteUrl)],
   }
 })

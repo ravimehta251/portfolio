@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STOMP chat demo</title>
+</head>
+<body>
+  <h1>Chat demo</h1>
+  <p id="status" role="status">Connecting…</p>
+  <form id="chat-form">
+    <label for="sender">Display name</label>
+    <input id="sender" required maxlength="40" value="Ravi">
+    <label for="content">Message</label>
+    <input id="content" required maxlength="500">
+    <button id="send" type="submit" disabled>Send</button>
+  </form>
+  <ul id="messages" aria-live="polite"></ul>
+
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.2.0/bundles/stomp.umd.min.js"></script>
+  <script>
+    const status = document.getElementById('status');
+    const send = document.getElementById('send');
+    const messages = document.getElementById('messages');
+    const client = new StompJs.Client({
+      brokerURL: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`,
+      reconnectDelay: 3000,
+      connectionTimeout: 10000,
+    });
+
+    client.onConnect = () => {
+      client.subscribe('/topic/messages', frame => {
+        try {
+          const message = JSON.parse(frame.body);
+          const item = document.createElement('li');
+          item.textContent = `${message.sender}: ${message.content} (${message.sentAt})`;
+          messages.appendChild(item);
+        } catch {
+          status.textContent = 'Received an invalid message.';
+        }
+      });
+      client.subscribe('/user/queue/errors', frame => {
+        status.textContent = frame.body;
+      });
+      status.textContent = 'Connected';
+      send.disabled = false;
+    };
+
+    client.onWebSocketClose = () => {
+      status.textContent = 'Disconnected; trying to reconnect…';
+      send.disabled = true;
+    };
+    client.onWebSocketError = () => {
+      status.textContent = 'Connection error.';
+      send.disabled = true;
+    };
+    client.onStompError = () => {
+      status.textContent = 'Messaging server reported an error.';
+      send.disabled = true;
+    };
+
+    document.getElementById('chat-form').addEventListener('submit', event => {
+      event.preventDefault();
+      if (!client.connected) return;
+      const sender = document.getElementById('sender').value.trim();
+      const content = document.getElementById('content').value.trim();
+      if (!sender || !content) return;
+      client.publish({
+        destination: '/app/chat.send',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({sender, content}),
+      });
+      document.getElementById('content').value = '';
+    });
+
+    client.activate();
+    window.addEventListener('pagehide', () => { void client.deactivate(); });
+  </script>
+</body>
+</html>

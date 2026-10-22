@@ -1,0 +1,37 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway-demo
+  cloud:
+    gateway:
+      server:
+        webflux:
+          httpclient:
+            connect-timeout: 2000
+            response-timeout: 5s
+          routes:
+            - id: users-route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/users/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Edge, gateway-demo
+                - AddResponseHeader=X-Served-By, gateway-demo
+            - id: products-route
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/products/**
+              filters:
+                - StripPrefix=1
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - http://localhost:5173
+                allowedMethods: [GET, POST, DELETE, OPTIONS]
+                allowedHeaders: [Authorization, Content-Type]
+                exposedHeaders: [X-Served-By]
+                maxAge: 3600

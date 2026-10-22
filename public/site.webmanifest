@@ -1,12 +1,12 @@
 {
-  "name": "Ravi Kumar — Engineering Portfolio",
+  "name": "Ravi Kumar — Backend Engineering Portfolio",
   "short_name": "Ravi Kumar",
-  "description": "Java, Spring Boot, distributed systems, and full-stack engineering.",
+  "description": "Backend-focused software engineering with Java, Spring Boot, distributed systems, and AI-powered products.",
   "lang": "en-IN",
   "start_url": "/",
   "scope": "/",
   "display": "browser",
-  "theme_color": "#080b10",
-  "background_color": "#080b10",
+  "theme_color": "#282C20",
+  "background_color": "#282C20",
   "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }

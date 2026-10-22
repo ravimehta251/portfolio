@@ -1,58 +1,15 @@
-import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
-import { ArrowDown, ArrowDownRight, ArrowUpRight, Download, MapPin, Pause, Play } from 'lucide-react'
-import { Github, Linkedin } from '../components/Brands'
-import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowDown, ArrowDownRight, ArrowUpRight, Download, MapPin } from 'lucide-react'
+import { Asterisk } from '../components/Identity'
 import { profile } from '../data/portfolio'
-import { ExternalLink } from '../components/Shared'
-
-const NetworkScene = lazy(() => import('../three/NetworkScene'))
-function StaticNetwork() {
-  return <div className="static-network" role="img" aria-label="API gateway connecting services, Kafka, Redis, PostgreSQL, and AI / RAG">
-    <svg viewBox="0 0 500 420" aria-hidden="true"><path d="M250 90 90 180 150 320 350 330 420 170 250 90M90 180 420 170M250 90 150 320M250 90 350 330M90 180 350 330" /></svg>
-    {['API Gateway', 'Services', 'Kafka', 'Redis', 'PostgreSQL', 'AI / RAG'].map((label, i) => <span key={label} className={`static-node node-${i}`}><i />{label}</span>)}
-  </div>
-}
-class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false }
-  static getDerivedStateFromError() { return { failed: true } }
-  render() { return this.state.failed ? <StaticNetwork /> : this.props.children }
-}
 export default function Hero() {
-  const reduced = useReducedMotion()
-  const [desktop, setDesktop] = useState(false)
-  const [paused, setPaused] = useState(false)
-  const [visible, setVisible] = useState(true)
-  useEffect(() => {
-    const query = matchMedia('(min-width: 768px)')
-    const update = () => setDesktop(query.matches)
-    update(); query.addEventListener('change', update)
-    const hero = document.getElementById('home')!
-    let inView = true
-    const updateVisibility = () => setVisible(inView && !document.hidden)
-    const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; updateVisibility() })
-    observer.observe(hero); document.addEventListener('visibilitychange', updateVisibility)
-    return () => { query.removeEventListener('change', update); observer.disconnect(); document.removeEventListener('visibilitychange', updateVisibility) }
-  }, [])
-  return <section id="home" className="hero">
-    <div className="hero-grid" aria-hidden="true" />
-    <div className="container hero-main">
-      <motion.div className="hero-copy" initial={{ opacity: 0, y: reduced ? 0 : 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-        <div className="hero-kicker"><span className="status-dot" /> SOFTWARE ENGINEER <span className="kicker-divider">/</span> JAVA & SPRING BOOT</div>
-        <p className="hero-name">Hi, I’m Ravi Kumar <span className="small-cross">✳</span></p>
-        <h1>Engineering<br />systems that<br /><span className="headline-accent">go beyond.</span></h1>
-        <p className="hero-description">{profile.introduction}</p>
-        <div className="hero-actions"><a href="#projects" className="button button-primary">Explore my work <ArrowDownRight size={19} /></a><a href={profile.resume} download="Ravi_Kumar_Resume.pdf" className="button button-secondary">Download resume <Download size={17} /></a></div>
-        <div className="hero-socials"><ExternalLink href={profile.github}><Github size={16} /> GitHub</ExternalLink><ExternalLink href={profile.linkedin}><Linkedin size={16} /> LinkedIn</ExternalLink><span className="location"><MapPin size={13} /> Bengaluru, India</span></div>
-      </motion.div>
-      <motion.div className="hero-visual" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25, duration: 1 }}>
-        <div className="scene-heading"><span className="mono">SYSTEM_TOPOLOGY / 01</span><span className="scene-indicator"><span className="status-dot" /> CONNECTED</span></div>
-        <div className="scene-stage" data-interactive>
-          {desktop && !reduced ? <SceneBoundary><Suspense fallback={<StaticNetwork />}><NetworkScene active={visible && !paused} /></Suspense></SceneBoundary> : <StaticNetwork />}
-        </div>
-        <div className="scene-footer"><span><span className="mini-square" /> ARCHITECTURE IN MOTION</span>{desktop && !reduced && <button onClick={() => setPaused(!paused)} aria-label={paused ? 'Play 3D animation' : 'Pause 3D animation'}>{paused ? <Play size={12} /> : <Pause size={12} />} {paused ? 'PLAY' : 'PAUSE'}</button>}</div>
-        <div className="scene-caption"><span>01 — THINK IN SYSTEMS</span><span>BUILD FOR PEOPLE <ArrowUpRight size={12} /></span></div>
-      </motion.div>
+  return <section className="hero" id="home" aria-labelledby="hero-title">
+    <div className="hero-track" aria-hidden="true"><svg viewBox="0 0 1000 900" preserveAspectRatio="none"><path d="M1100 60H580c-190 0-190 235 0 235h55c190 0 190 240 0 240H490c-185 0-185 260 0 260h610" /><path d="M1100 94H580c-145 0-145 167 0 167h55c235 0 235 308 0 308H490c-140 0-140 192 0 192h610" /></svg></div>
+    <div className="shell hero-inner">
+      <div className="hero-kicker eyebrow"><span className="status-dot" /> ENGINEER BY MIND. BUILDER AT HEART.</div>
+      <h1 id="hero-title" className="hero-name"><span>RAVI</span><span>KUMAR<span className="name-period">.</span></span></h1>
+      <div className="hero-summary"><p className="hero-role">Backend-Focused<br />Software Engineer<span className="lime-text">.</span></p><p className="hero-description">Building backend systems, real-time applications, and AI-powered experiences with Java and Spring Boot.</p><div className="hero-actions"><a className="button button-lime" href="#projects">View projects <ArrowDownRight size={19} /></a><a className="resume-link" href={profile.resume} download="Ravi-Kumar-Resume.pdf">Download resume <Download size={16} /></a></div></div>
+      <div className="hero-portrait-wrap"><Asterisk className="hero-asterisk" /><div className="portrait-label eyebrow" aria-hidden="true">A LITTLE CURIOUS.<br />ALWAYS BUILDING. <ArrowDownRight size={20} /></div><picture className="hero-portrait"><source srcSet="/images/ravi-portrait-768.webp 768w, /images/ravi-portrait.webp 1122w" sizes="(max-width: 700px) 90vw, 48vw" type="image/webp" /><img src="/images/ravi-portrait.webp" width="1122" height="1402" alt="Ravi Kumar, smiling, in a dark T-shirt" fetchPriority="high" decoding="async" /></picture><a className="portrait-contact" href="#contact"><span>Have something in mind?<br /><strong>Contact me</strong></span><span className="portrait-contact-icon"><ArrowUpRight size={29} /></span></a></div>
+      <div className="hero-bottom"><span><MapPin size={13} /> BENGALURU, INDIA</span><span>BE ’27 <i /> GRADUATING JULY 2027</span><a href="#about">SCROLL TO EXPLORE <ArrowDown size={15} /></a></div>
     </div>
-    <div className="hero-bottom container"><a href="#about" className="scroll-prompt"><ArrowDown size={15} /> SCROLL TO EXPLORE</a><div className="hero-specialties"><span>Backend engineering</span><span>Distributed systems</span><span>Full-stack development</span></div><span className="mono hero-index">PORTFOLIO / 2026</span></div>
   </section>
 }

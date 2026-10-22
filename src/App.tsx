@@ -1,16 +1,37 @@
+import { useEffect } from 'react'
 import Navbar from './components/Navbar'
-import Cursor from './components/Cursor'
 import Hero from './sections/Hero'
 import About from './sections/About'
+import ProjectShowcases from './components/ProjectShowcases'
 import Skills from './sections/Skills'
-import Projects from './sections/Projects'
-import Achievements from './sections/Achievements'
 import Education from './sections/Education'
 import Contact from './sections/Contact'
-import { ArrowUp } from 'lucide-react'
+
 export default function App() {
-  return <><a className="skip-link" href="#about">Skip to content</a><Navbar /><Cursor />
-    <main><Hero /><About /><Skills /><Projects /><Achievements /><Education /><Contact /></main>
-    <footer className="site-footer container"><a className="wordmark" href="#home">ravi<span className="brand-dot">.</span></a><p>Ravi Kumar · Built with intent.</p><a href="#home" className="back-top">Back to top <ArrowUp size={14} /></a></footer>
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.08 })
+    document.querySelectorAll('.reveal').forEach(element => observer.observe(element))
+    document.documentElement.classList.add('motion-ready')
+    return () => {
+      observer.disconnect()
+      document.documentElement.classList.remove('motion-ready')
+    }
+  }, [])
+  return <>
+    <a className="skip-link" href="#about">Skip to content</a>
+    <Navbar />
+    <main id="main-content">
+      <Hero />
+      <div className="discipline-strip" aria-label="Core disciplines"><div>JAVA & SPRING BOOT <span>✳</span> DISTRIBUTED SYSTEMS <span>✳</span> REAL-TIME APPLICATIONS <span>✳</span> AI INTEGRATION <span>✳</span></div></div>
+      <About /><ProjectShowcases /><Skills /><Education /><Contact />
+    </main>
   </>
 }

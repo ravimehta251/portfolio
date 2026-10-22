@@ -1,68 +1,51 @@
 # Ravi Kumar — Engineering Portfolio
 
-A complete React + TypeScript portfolio built with Vite, Tailwind CSS, Framer Motion, Lucide, React Three Fiber, Drei, and Three.js. All personal information, project descriptions, links, education, and achievements come from the supplied `H:/RAVI_RESUME.pdf`. The deployed resume is the tracked `public/resume.pdf`.
+A complete responsive portfolio using React, TypeScript, and Vite. The visual direction combines dark olive, electric lime, warm off-white, oversized typography, original RK branding, and Ravi’s supplied portrait. [DESIGN.md](DESIGN.md) records the reference study and design decisions.
 
-## Run and validate
+## Run locally
 
-```bash
-npm install
+```sh
+npm ci
 npm run dev
 ```
 
-```bash
-npm run typecheck
+Open the local URL printed by Vite (normally http://localhost:5173).
+
+```sh
 npm run lint
 npm run build
 npm run preview
 ```
 
-For the browser interaction and responsive checks, leave `npm run dev` running in one terminal, then run `npm run check:browser` in another. Set `PORTFOLIO_URL` if Vite uses another port. The check uses Edge or Chrome on Windows (or a Playwright browser installation on other systems) and writes screenshots to the ignored `qa/` directory.
+The production build is written to `dist/`. It can be served by a static host at a domain root. The existing deployment metadata configuration is preserved. Set `SITE_URL=https://your-domain.com` in your build environment to generate canonical URLs, absolute social metadata, a sitemap, and crawler rules. No production URL is assumed.
 
-`npm run build` checks TypeScript before producing `dist/`. Serve `dist/` through a static host or use `npm run preview` to inspect that production output locally.
+## Content and assets
 
-## Structure
+- `src/data/portfolio.ts`: profile, verified project details, grouped skills, and education.
+- `src/sections/`: hero, about, skills, education/achievements, and contact.
+- `src/components/ProjectShowcases.tsx`: three project case studies and clearly labeled interface/architecture illustrations. These are visual explanations, not live backend demos.
+- `src/components/Identity.tsx`: original RK monogram and decorative asterisk.
+- `src/index.css`, `src/sections.css`, `src/projects.css`: design tokens, responsive compositions, and component styling.
+- `public/resume.pdf`: supplied resume, downloaded by the resume links.
+- `public/images/`: optimized transparent WebP portraits, with responsive sources and reserved dimensions.
+- `public/social-preview.svg`: editable, self-contained 1200×630 social-card artwork; `social-preview.png` is its raster export.
 
-```text
-src/
-  App.tsx                 All seven sections, navigation, cursor, and footer
-  main.tsx                React entry point and global styles
-  data/portfolio.ts       Resume-derived profile, skills, projects, and education
-  types/portfolio.ts      Shared content types
-  sections/               Home, about, skills, projects, achievements, education, contact
-  components/             Navigation, project details, interactive demos, shared UI
-  hooks/                  Active-section tracking
-  three/NetworkScene.tsx  Lazy-loaded distributed-system hero
-public/
-  resume.pdf              Downloadable original resume
-  favicon.svg             Browser icon
-  social-preview.png      1200 × 630 social card
-  social-preview.svg      Editable social-card source
-  robots.txt              Local/default crawler rules
-  site.webmanifest        Site identity and icon
+Professional details and metrics were checked against `public/resume.pdf`. No `my.jpg` or project screenshots were present in the project. The supplied root `ravi.png` is preserved byte-for-byte; the optimized copies retain transparency and do not change Ravi’s identity.
+
+Contact links open the visitor’s email app. The copy-email button uses the browser clipboard and reports success or a manual-copy fallback. Project repository links go to the verified GitHub pages; no unverified live-demo links are shown.
+
+Motion is limited to an opening portrait reveal, once-only section entrances, and hover feedback. Natural scrolling, keyboard navigation, visible focus states, an Escape-dismissible mobile menu, and `prefers-reduced-motion` are supported. Fonts are hosted locally; no animation or 3D runtime is required.
+
+## Browser verification
+
+With the dev server running:
+
+```sh
+npm run check:browser
 ```
 
-The main app links every section through matching navigation anchors. Projects open accessible detail dialogs with problem, solution, stack, decisions, repository links, and interactive architecture demonstrations. Recall illustrates the document-to-answer pipeline; Bidly illustrates serialized bid processing; ShopMesh illustrates checkout and payment-failure compensation. Demo data and timing are illustrative, run entirely in the browser, and do not connect to the project backends. Resume-supported outcomes are presented separately.
+Set `PORTFOLIO_URL` for a different URL. The check uses installed Chrome/Edge on Windows or a Playwright Chromium installation elsewhere. It checks responsive layouts, image loading, anchors, resume delivery, project disclosures, mobile navigation, reduced motion, browser errors, and accessibility. Screenshots are saved in the ignored `qa/` directory.
 
-The hero loads its 3D runtime on desktop with a static network alternative on mobile, for reduced motion, and if the scene fails. Rendering pauses outside the hero or in a hidden tab; users can pause it manually. The custom cursor is restricted to desktop pointer devices. Section reveals and interactive diagrams respect reduced-motion preferences.
+## Recoverable checkpoint
 
-## Contact behavior
-
-The contact form validates name, email, and message, then prepares a `mailto:` draft in the visitor's email app. The visitor reviews and sends it there. The site has no mail backend and never claims delivery. Email, telephone, GitHub, LinkedIn, and LeetCode destinations come from the resume.
-
-## Content updates
-
-Edit `src/data/portfolio.ts` for profile, navigation, skills, projects, and education. Achievements are rendered in `src/sections/Achievements.tsx`. Replace `public/resume.pdf` when the resume changes. Keep professional claims supported by the resume, and update identity metadata in `index.html` when changing profile details. Only add live-demo links when a real deployment exists.
-
-## Deployment
-
-Use `npm run build` as the build command and `dist` as the publish directory on Vercel, Netlify, or another static host. The app currently expects deployment at a domain root.
-
-Copy `.env.example` to `.env.local` or set this build environment variable on the host:
-
-```env
-SITE_URL=https://your-actual-domain.com
-```
-
-`SITE_URL` must be the actual HTTP(S) origin, without a subpath, query, or credentials. At build time it generates the canonical URL, Open Graph URL, absolute PNG social-image URLs, Person structured-data URL, `dist/sitemap.xml`, and the sitemap reference in `dist/robots.txt`. Leave it blank while a production domain is unknown: development and builds still work, with no invented canonical URL or sitemap domain. The default crawler rules remain available. `SITE_URL` is public metadata and must never contain secrets.
-
-The PNG social card is served locally and has no external image dependency. Its SVG source is included for future design edits. Validate the deployed site on actual mobile devices and run Lighthouse against the production URL before launch.
+The pre-rebuild tracked project is saved as `checkpoints/2026-10-23-before-rebuild/portfolio-tracked.zip`. See the adjacent `RESTORE.txt`. Git history, environment files, the original photograph, and unrelated `output/` and `tmp/` files are preserved. The checkpoint folder is excluded from version control and production assets.

@@ -1,0 +1,10 @@
+com\example\testing\UserNotFoundException.class
+com\example\testing\UserHttpErrors.class
+com\example\testing\InMemoryUserRepository.class
+com\example\testing\UserService.class
+com\example\testing\CreateUserRequest.class
+com\example\testing\Calculator.class
+com\example\testing\User.class
+com\example\testing\TestingApplication.class
+com\example\testing\UserController.class
+com\example\testing\UserRepository.class
