@@ -1,40 +1,37 @@
 # Ravi Kumar — Engineering Portfolio
 
-A complete responsive portfolio using React, TypeScript, and Vite. The visual direction combines dark olive, electric lime, warm off-white, oversized typography, original RK branding, and Ravi’s supplied portrait. [DESIGN.md](DESIGN.md) records the reference study and design decisions.
+React, TypeScript and Vite portfolio for Ravi Kumar, a backend-focused software engineer. The established olive, cream and lime identity, personal information, resume and project repository links are retained. [DESIGN.md](DESIGN.md) records the live-site audit, reference study and implementation decisions.
 
-## Run locally
+## Development
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite (normally http://localhost:5173).
+Vite serves the local project, normally at http://localhost:5173. Production output is generated in `dist/`:
 
 ```sh
+npm run typecheck
 npm run lint
 npm run build
-npm run preview
 ```
 
-The production build is written to `dist/`. It can be served by a static host at a domain root. The existing deployment metadata configuration is preserved. Set `SITE_URL=https://your-domain.com` in your build environment to generate canonical URLs, absolute social metadata, a sitemap, and crawler rules. No production URL is assumed.
+Set `SITE_URL=https://www.ravisingh.online` in the build environment for canonical/social metadata, sitemap and crawler rules. Existing deployment configuration is preserved. These source changes do not change the live deployment.
+
+## Experience
+
+- A coordinated hero entrance finishes in 1.08 seconds, with masked name reveals, a restrained portrait entrance, short content staggers and limited desktop pointer parallax.
+- One CSS/IntersectionObserver motion system varies text, image, depth and line reveals. It cleans up listeners and observers, responds to reduced-motion changes and leaves content visible when observation is unavailable.
+- Recall, Bidly and ShopMesh have distinct visual identities, explicit problem/approach summaries, code links and expandable engineering details. Their replayable demonstrations use clearly labeled sample data; they do not connect to live backends.
+- The ShopMesh architecture explorer uses SVG connections and native buttons. Keyboard and touch users can select nodes to read routing, event, data-ownership and failure-handling explanations.
+- The mobile menu supports focus management, focus looping, Escape, outside dismissal, anchor navigation and desktop resizing. Contact actions include visible copy success and failure feedback.
 
 ## Content and assets
 
-- `src/data/portfolio.ts`: profile, verified project details, grouped skills, and education.
-- `src/sections/`: hero, about, skills, education/achievements, and contact.
-- `src/components/ProjectShowcases.tsx`: three project case studies and clearly labeled interface/architecture illustrations. These are visual explanations, not live backend demos.
-- `src/components/Identity.tsx`: original RK monogram and decorative asterisk.
-- `src/index.css`, `src/sections.css`, `src/projects.css`: design tokens, responsive compositions, and component styling.
-- `public/resume.pdf`: supplied resume, downloaded by the resume links.
-- `public/images/`: optimized transparent WebP portraits, with responsive sources and reserved dimensions.
-- `public/social-preview.svg`: editable, self-contained 1200×630 social-card artwork; `social-preview.png` is its raster export.
+`src/data/portfolio.ts` remains the content source for profile information, project claims, toolkit and education. `public/resume.pdf` is preserved. No project screenshots were supplied: the project visuals are original interface and architecture illustrations, labeled accordingly.
 
-Professional details and metrics were checked against `public/resume.pdf`. No `my.jpg` or project screenshots were present in the project. The supplied root `ravi.png` is preserved byte-for-byte; the optimized copies retain transparency and do not change Ravi’s identity.
-
-Contact links open the visitor’s email app. The copy-email button uses the browser clipboard and reports success or a manual-copy fallback. Project repository links go to the verified GitHub pages; no unverified live-demo links are shown.
-
-Motion is limited to an opening portrait reveal, once-only section entrances, and hover feedback. Natural scrolling, keyboard navigation, visible focus states, an Escape-dismissible mobile menu, and `prefers-reduced-motion` are supported. Fonts are hosted locally; no animation or 3D runtime is required.
+The supplied portrait is retained in responsive transparent WebP encodings. The previous `.webp` files were actually identical 1.93 MB PNGs. The corrected assets are approximately 210 KB at 1122px and 101 KB at 768px. The unmodified input is retained in the ignored `qa/ravi-portrait-original.png` for this workspace. `scripts/optimize-portrait.mjs` documents the deterministic encoding; it does not alter the portrait's content. Fonts are served locally.
 
 ## Browser verification
 
@@ -42,10 +39,10 @@ With the dev server running:
 
 ```sh
 npm run check:browser
+node scripts/check-project-demos.mjs
+node scripts/check-navigation.mjs
 ```
 
-Set `PORTFOLIO_URL` for a different URL. The check uses installed Chrome/Edge on Windows or a Playwright Chromium installation elsewhere. It checks responsive layouts, image loading, anchors, resume delivery, project disclosures, mobile navigation, reduced motion, browser errors, and accessibility. Screenshots are saved in the ignored `qa/` directory.
+Set `PORTFOLIO_URL` to test another local or production preview. On Windows the script uses installed Chrome; other platforms use Playwright Chromium. It checks 360, 390, 768, 1440 and 1920px layouts, anchors, PDF delivery, project disclosures, architecture keyboard controls, menu focus, reduced motion, missing-observer fallback, browser errors and axe accessibility rules. Captures and results are saved to ignored `qa/`.
 
-## Recoverable checkpoint
-
-The pre-rebuild tracked project is saved as `checkpoints/2026-10-23-before-rebuild/portfolio-tracked.zip`. See the adjacent `RESTORE.txt`. Git history, environment files, the original photograph, and unrelated `output/` and `tmp/` files are preserved. The checkpoint folder is excluded from version control and production assets.
+`node scripts/audit-sites.mjs` records the public-site reference audit and screenshots. This requires network access. See [VALIDATION.md](VALIDATION.md) for the completed checks and their limits.

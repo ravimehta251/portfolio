@@ -1,0 +1,159 @@
+.contact-section {
+  position: relative;
+  border-top: 12px solid var(--ink);
+}
+
+.contact-section .contact-inner {
+  position: relative;
+}
+
+.contact-section .contact-back > svg {
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1);
+}
+
+.contact-section .contact-back:is(:hover, :focus-visible) > svg {
+  transform: translateY(-4px);
+}
+
+.contact-section .contact-circle {
+  transition: color 220ms ease, background-color 220ms ease, transform 280ms cubic-bezier(.2,.7,.2,1), box-shadow 220ms ease;
+}
+
+.contact-section .contact-circle > svg {
+  transition: transform 280ms cubic-bezier(.2,.7,.2,1);
+}
+
+.contact-section .contact-circle:is(:hover, :focus-visible) {
+  background: var(--ink);
+  color: var(--lime);
+  transform: rotate(4deg);
+  box-shadow: 0 0 0 6px #282c2010;
+}
+
+.contact-section .contact-circle:is(:hover, :focus-visible) > svg {
+  transform: translate(4px, -4px);
+}
+
+.contact-section .email-row > a,
+.contact-section .social-links > a,
+.contact-section .footer-brand {
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.contact-section .email-row > a {
+  overflow-wrap: anywhere;
+  min-width: 0;
+  border-bottom-color: #7c912b;
+}
+
+.contact-section .email-row > a:is(:hover, :focus-visible) {
+  border-bottom-color: var(--ink);
+}
+
+.contact-section .copy-email {
+  min-width: 44px;
+  min-height: 44px;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.contact-section .copy-email:is(:hover, :focus-visible),
+.contact-section .copy-email[data-copy-state="copied"] {
+  background: var(--ink);
+  color: var(--lime);
+}
+
+.contact-section .copy-email:active {
+  transform: scale(.94);
+}
+
+.contact-section .copy-email:disabled {
+  cursor: progress;
+  opacity: .6;
+}
+
+.contact-section .copy-message {
+  min-height: 22px;
+  height: auto;
+  line-height: 1.6;
+  max-width: 370px;
+}
+
+.contact-section .copy-message[data-copy-state="copied"] {
+  font-weight: 700;
+}
+
+.contact-section .social-links > a {
+  position: relative;
+}
+
+.contact-section .social-links > a::after {
+  content: '';
+  position: absolute;
+  height: 1px;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 240ms cubic-bezier(.2,.7,.2,1);
+}
+
+.contact-section .social-links > a > svg {
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1);
+}
+
+.contact-section .social-links > a:is(:hover, :focus-visible)::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.contact-section .social-links > a:is(:hover, :focus-visible) > svg {
+  transform: translate(3px, -3px);
+}
+
+.contact-section :focus-visible {
+  outline-color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .contact-section {
+    border-top-width: 8px;
+  }
+
+  .contact-section .contact-inner .section-topline > .contact-back {
+    display: flex;
+  }
+
+  .contact-section .contact-asterisk {
+    display: none;
+  }
+
+  .contact-section .email-row {
+    gap: 12px;
+  }
+
+  .contact-section .copy-message {
+    max-width: 290px;
+    min-height: 32px;
+  }
+
+  .contact-section .contact-circle {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-section .contact-back > svg,
+  .contact-section .contact-circle,
+  .contact-section .contact-circle > svg,
+  .contact-section .email-row > a,
+  .contact-section .copy-email,
+  .contact-section .social-links > a,
+  .contact-section .social-links > a::after,
+  .contact-section .social-links > a > svg,
+  .contact-section .footer-brand {
+    transition: none;
+  }
+}

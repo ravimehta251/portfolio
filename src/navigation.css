@@ -1,0 +1,128 @@
+.site-header {
+  border-bottom: 1px solid transparent;
+  transition: background-color 220ms ease, border-color 220ms ease;
+}
+
+.site-header .header-inner {
+  transition: height 220ms ease;
+}
+
+.site-header .main-navigation > a {
+  position: relative;
+  transition: color 180ms ease;
+}
+
+.site-header .main-navigation > a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1);
+}
+
+.site-header .main-navigation > a:is(:hover, :focus-visible)::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.site-header .main-navigation > a:is(:hover, :focus-visible) {
+  color: var(--lime);
+}
+
+.site-header .main-navigation > a > svg,
+.site-header .header-contact > svg {
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1), opacity 180ms ease;
+}
+
+.site-header .main-navigation > a:is(:hover, :focus-visible) > svg,
+.site-header .header-contact:is(:hover, :focus-visible) > svg {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.site-header .menu-toggle {
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.site-header .menu-toggle:is(:hover, :focus-visible) {
+  border-color: var(--lime);
+  background: #ffffff0a;
+}
+
+@media (max-width: 700px) {
+  .site-header.has-open-menu {
+    background: var(--ink);
+    border-bottom-color: #565c48;
+  }
+
+  .site-header .main-navigation,
+  .site-header .main-navigation.is-open {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-height: calc(100svh - 98px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px) scale(.985);
+    transform-origin: top center;
+    transition: opacity 180ms ease, transform 220ms cubic-bezier(.2,.7,.2,1), visibility 0s 220ms;
+  }
+
+  .site-header .main-navigation.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition-delay: 0s;
+  }
+
+  .site-header .main-navigation > a {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: color 180ms ease, opacity 160ms ease, transform 180ms ease;
+  }
+
+  .site-header .main-navigation.is-open > a {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s, calc(25ms + var(--nav-order) * 25ms), calc(25ms + var(--nav-order) * 25ms);
+  }
+
+  .site-header .main-navigation > a::after {
+    bottom: 0;
+  }
+
+  .site-header .main-navigation > a .nav-label {
+    margin-right: auto;
+  }
+
+  .site-header .main-navigation > a:is(:hover, :focus-visible) {
+    color: #526600;
+  }
+
+  .site-header .main-navigation :focus-visible {
+    outline-color: var(--ink);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .site-header .header-inner,
+  .site-header .main-navigation,
+  .site-header .main-navigation > a,
+  .site-header .main-navigation > a::after,
+  .site-header .main-navigation > a > svg,
+  .site-header .header-contact > svg,
+  .site-header .menu-toggle {
+    transition: none;
+  }
+}
