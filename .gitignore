@@ -18,6 +18,17 @@ dist-ssr
 .env.*
 !.env.example
 
+# Local design/audit notes
+/DESIGN.md
+/VALIDATION.md
+
+# Generated test reports
+/coverage/
+/playwright-report/
+/test-results/
+/blob-report/
+/.playwright/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
