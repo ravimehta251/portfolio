@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { ArrowDown, ArrowDownRight, ArrowUpRight, Download, MapPin } from 'lucide-react'
 import { Asterisk } from '../components/Identity'
-import { profile } from '../data/portfolio'
+
 export default function Hero() {
   const hero = useRef<HTMLElement>(null)
   const portrait = useRef<HTMLPictureElement>(null)
